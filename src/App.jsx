@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./components/header";
 import SearchBar from "./components/SearchBar";
 import PlaylistCard from "./components/playlistcard";
-import AddProfile from "./addprofile"; 
+import AddProfile from "./addprofile";
 
 function App() {
   return (
