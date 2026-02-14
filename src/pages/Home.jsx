@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "../components/header";
 import SearchBar from "../components/SearchBar";
 import PlaylistCard from "../components/playlistcard";
-import AddProfile from "../addprofile";
 
 function Home() {
   const [profiles, setProfiles] = useState([]);
@@ -30,15 +30,6 @@ function Home() {
       <Header />
       <SearchBar setSearchName={setSearchName} />
 
-      <AddProfile />
-
-      <div style={{ display: "flex", flexWrap: "wrap", padding: "1rem", gap: "1rem" }}>
-        <PlaylistCard title="Top Hits" />
-        <PlaylistCard title="Chill Vibes" />
-        <PlaylistCard title="Workout Mix" />
-        <PlaylistCard title="Focus Music" />
-      </div>
-
       <section style={{ padding: "1rem" }}>
         <h2>Profiles (Fetched from API)</h2>
 
@@ -58,15 +49,27 @@ function Home() {
           </select>
         </label>
 
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginTop: "1rem" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1rem",
+            marginTop: "1rem"
+          }}
+        >
           {profiles.map((profile) => (
-            <PlaylistCard
+            <Link
               key={profile.id}
-              title={profile.name}
-              subtitle={profile.title}
-              description={profile.bio}
-              image={profile.image_url}
-            />
+              to={`/profile/${profile.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <PlaylistCard
+                title={profile.name}
+                subtitle={profile.title}
+                description={profile.bio}
+                image={profile.image_url}
+              />
+            </Link>
           ))}
         </div>
       </section>
