@@ -1,23 +1,26 @@
-// App.jsx
+// src/App.jsx
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/home";
-import AddProfile from "./pages/addprofile";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import AddProfile from "./pages/AddProfile";
 import OtherProfiles from "./pages/OtherProfiles";
-import About from "./pages/about";
-import NotFound from "./pages/notfound";
+import About from "./pages/About";
+import ProfileDetail from "./pages/ProfileDetail";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div>
-      {/* Routes for all pages */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/add-profile" element={<AddProfile />} />
-        <Route path="/profiles" element={<OtherProfiles />} />
-        <Route path="/about" element={<About />} />
+    <Routes>
+      {/* All pages use the Layout with nav */}
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="add-profile" element={<AddProfile />} />
+        <Route path="profiles" element={<OtherProfiles />} />
+        <Route path="profiles/:id" element={<ProfileDetail />} />
+        <Route path="about" element={<About />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+      </Route>
+    </Routes>
   );
 }
 
