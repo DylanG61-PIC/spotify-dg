@@ -1,42 +1,63 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --spotify-green: #1DB954;
+  --dark-bg: #121212;
+  --light-text: #fff;
+  --card-bg: #181818;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Reset some defaults */
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--light-text);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Links */
+a {
+  color: var(--light-text);
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+a:hover {
+  color: var(--spotify-green);
 }
 
+/* Buttons */
+button {
+  background-color: var(--spotify-green);
+  color: var(--light-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #1ed760; /* slightly brighter green */
+}
+
+/* Inputs / Textareas */
+input, textarea, select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* Playlist / Profile cards */
 .card {
-  padding: 2em;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s;
 }
 
-.read-the-docs {
-  color: #888;
+.card:hover {
+  transform: scale(1.05);
 }
