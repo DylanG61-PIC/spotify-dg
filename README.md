@@ -23,5 +23,4 @@ Enhance profile detail pages with additional information
 
 Add advanced sorting options (e.g., alphabetical, recent, or popularity)
 
-Live Demo
 
