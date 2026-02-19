@@ -1,52 +1,27 @@
-// OtherProfiles.jsx (with test data)
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import ProfileCard from "../components/ProfileCard";
+import { FilterContext } from "../context/FilterContext"; // ✅ Import filter context
 
 function OtherProfiles() {
   const [profiles, setProfiles] = useState([]);
   const [titles, setTitles] = useState([]);
-  const [selectedTitle, setSelectedTitle] = useState("");
 
-  // Mock API data
-  const testProfiles = [
-    {
-      id: 1,
-      name: "Alice Johnson",
-      title: "Top Hits Curator",
-      bio: "Music enthusiast and playlist creator.",
-      image_url: "https://i.pravatar.cc/220?img=19",
-    },
-    {
-      id: 2,
-      name: "Bob Smith",
-      title: "Chill Vibes DJ",
-      bio: "Loves relaxing tunes and chill playlists.",
-      image_url: "https://i.pravatar.cc/220?img=2",
-    },
-    {
-      id: 3,
-      name: "Carol Lee",
-      title: "Workout Mix Coach",
-      bio: "Fitness music expert and motivator.",
-      image_url: "https://i.pravatar.cc/220?img=5",
-    },
-    {
-      id: 4,
-      name: "David Kim",
-      title: "Focus Music Specialist",
-      bio: "Helps you concentrate with the perfect playlists.",
-      image_url: "https://i.pravatar.cc/220?img=11",
-    },
-  ];
+  // Use global filter state instead of local
+  const { selectedTitle, setSelectedTitle } = useContext(FilterContext);
 
-  // Load mock data on mount
+  // Fetch profiles from Hannah's API
   useEffect(() => {
-    setProfiles(testProfiles);
+    fetch("https://web.ics.purdue.edu/~zong6/profile-app/fetch-data.php")
+      .then((res) => res.json())
+      .then((data) => {
+        setProfiles(data);
 
-    // Extract unique titles for filter
-    const uniqueTitles = [...new Set(testProfiles.map((p) => p.title))];
-    setTitles(uniqueTitles);
+        // Extract unique titles for filter
+        const uniqueTitles = [...new Set(data.map((p) => p.title))];
+        setTitles(uniqueTitles);
+      })
+      .catch((err) => console.error("Error fetching profiles:", err));
   }, []);
 
   // Filter profiles by selected title
@@ -92,7 +67,7 @@ function OtherProfiles() {
         {filteredProfiles.map((profile) => (
           <Link
             key={profile.id}
-            to={`/profiles/${profile.id}`} // link to profile detail page
+            to={`/profiles/${profile.id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ProfileCard
