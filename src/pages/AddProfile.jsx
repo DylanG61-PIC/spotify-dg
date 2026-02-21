@@ -1,20 +1,47 @@
 // AddProfile.jsx
-import React, { useState } from "react";
+import React, { useReducer, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+const initialState = {
+  name: "",
+  email: "",
+  title: "",
+  bio: "",
+  image: "",
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_FIELD":
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    case "RESET":
+      return initialState;
+    default:
+      return state;
+  }
+}
 
 function AddProfile() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [title, setTitle] = useState("");
-  const [bio, setBio] = useState("");
-  const [image, setImage] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  // useRef for auto-focus
+  const nameInputRef = useRef(null);
+
+  useEffect(() => {
+    nameInputRef.current.focus();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Simulate API call
-    console.log({ name, email, title, bio, image });
+    console.log(state);
+
+    dispatch({ type: "RESET" });
 
     // After adding, redirect to Home
     navigate("/");
@@ -36,33 +63,45 @@ function AddProfile() {
         style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}
       >
         <input
+          ref={nameInputRef}
           type="text"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={state.name}
+          onChange={(e) =>
+            dispatch({ type: "SET_FIELD", field: "name", value: e.target.value })
+          }
           required
           style={{ padding: "0.5rem", borderRadius: "6px", border: "none" }}
         />
+
         <input
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={state.email}
+          onChange={(e) =>
+            dispatch({ type: "SET_FIELD", field: "email", value: e.target.value })
+          }
           required
           style={{ padding: "0.5rem", borderRadius: "6px", border: "none" }}
         />
+
         <input
           type="text"
           placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={state.title}
+          onChange={(e) =>
+            dispatch({ type: "SET_FIELD", field: "title", value: e.target.value })
+          }
           required
           style={{ padding: "0.5rem", borderRadius: "6px", border: "none" }}
         />
+
         <textarea
           placeholder="Bio"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
+          value={state.bio}
+          onChange={(e) =>
+            dispatch({ type: "SET_FIELD", field: "bio", value: e.target.value })
+          }
           required
           style={{
             padding: "0.5rem",
@@ -71,11 +110,14 @@ function AddProfile() {
             resize: "vertical",
           }}
         />
+
         <input
           type="text"
           placeholder="Image URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
+          value={state.image}
+          onChange={(e) =>
+            dispatch({ type: "SET_FIELD", field: "image", value: e.target.value })
+          }
           style={{ padding: "0.5rem", borderRadius: "6px", border: "none" }}
         />
 
