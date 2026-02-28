@@ -1,15 +1,8 @@
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React from "react";
+import useCardWidth from "../hooks/useCardWidth";
 
 function ProfileCard({ title, subtitle, description, image }) {
-  const cardRef = useRef(null);
-  const [cardWidth, setCardWidth] = useState(0);
-
-  useLayoutEffect(() => {
-    if (cardRef.current) {
-      const width = cardRef.current.offsetWidth;
-      setCardWidth(width);
-    }
-  }, []);
+  const { ref: cardRef, width: cardWidth } = useCardWidth();
 
   return (
     <div
@@ -56,7 +49,6 @@ function ProfileCard({ title, subtitle, description, image }) {
           </p>
         )}
 
-        {/* Display measured width */}
         <p style={{ fontSize: "0.75rem", marginTop: "8px", color: "#888" }}>
           Card width: {cardWidth}px
         </p>

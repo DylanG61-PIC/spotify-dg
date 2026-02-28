@@ -1,14 +1,15 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import useGoBack from "../hooks/useGoBack";
 
 export default function ProfileLayout() {
-  const navigate = useNavigate();
+  const goBack = useGoBack();
 
   return (
     <div>
-      <button onClick={() => navigate(-1)} style={{ marginBottom: "1rem" }}>
+      <button onClick={goBack} style={{ marginBottom: "1rem" }}>
         ← Go Back
       </button>
-      <Outlet /> {/* Nested route renders here */}
+      <Outlet />
     </div>
   );
 }
