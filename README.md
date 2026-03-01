@@ -1,26 +1,72 @@
-Spotify Lite
+🎵 Spotify UI Recreation
+Original Website/App Chosen
 
-Spotify Lite is a simplified web app that lets users explore playlists and profiles. Users can search by name, filter profiles by title, and view playlist cards — all dynamically and interactively.
+Spotify
+https://open.spotify.com/
 
-Progress Update
-Interactive Features Implemented
+Scope of Recreation
 
-Homepage search bar: Dynamically filters playlists and profiles by name as the user types.
+For this project, I recreated the core layout and user interface of Spotify using React. I focused on rebuilding the homepage structure, sidebar navigation, and playlist-style content layout. The goal was to replicate the visual design and navigation flow while keeping the project front-end focused (no real music streaming functionality).
 
-Other Profiles page filter: Dropdown filter updates profiles based on the selected title.
+Features Implemented
 
-Profiles update automatically whenever the user changes search input or selects a filter option.
+Sidebar navigation menu
 
-Why These Interactions
+Multiple routed pages
 
-These interactive features make the application dynamic and user-friendly. Users can instantly search for playlists or profiles and filter results without reloading the page, improving usability and supporting the app’s purpose of organizing and exploring profiles efficiently.
+Playlist-style content layout
 
-What’s Next
+Reusable card components
 
-Refine styling and layout for a more polished UI
+Interactive navigation using React Router
 
-Enhance profile detail pages with additional information
+Responsive design for different screen sizes
 
-Add advanced sorting options (e.g., alphabetical, recent, or popularity)
+Clean and consistent Spotify-inspired styling
 
+Technical Implementation
+State Management
 
+I used useState to manage UI interactions such as active navigation states and dynamically rendered content cards. State allows components to update and re-render efficiently based on user interaction.
+
+Routing Structure
+
+The application uses React Router for navigation:
+
+BrowserRouter wraps the application
+
+Routes and Route define the page structure
+
+Navigation links update the URL dynamically
+
+The Vite base configuration ensures proper routing on GitHub Pages
+
+Routing allows users to move between pages without refreshing the browser.
+
+Hooks Used
+
+useState – Managing component state
+
+useEffect – Handling side effects (if applicable)
+
+useCallback / useMemo – Performance optimization (if applicable)
+
+Live Site URL
+
+https://dylang61-pic.github.io/spotify-dg/
+
+Repository URL
+
+https://github.com/DylanG61-PIC/spotify-dg
+
+Future Improvements
+
+Integrate Spotify API for real music data
+
+Add search functionality
+
+Improve mobile responsiveness
+
+Add animations and transitions
+
+Implement user authentication
